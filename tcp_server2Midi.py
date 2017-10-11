@@ -35,21 +35,10 @@ while True:
 
             start_time = time.time()
             XYRInterp.TCPmessage2Object()
-            Xnote_value = int(float(XYRInterp.Object.x)/480*128)
-            Ynote_value = int(float(XYRInterp.Object.y)/240*128)
-            Xcontrol = Xnote_value
-            Ycontrol = Ynote_value
+            Xnote_value = int(float(XYRInterp.Object.x)/320*128)
             if Xnote_value != previous_note_value:
-                velocity = int(float(XYRInterp.Object.y)/300*128)
-                note = MidiNote(Xnote_value, velocity,10)
-                XYRInterp.Midi.appendNote(note)
-                note = MidiNote(Ynote_value, velocity,10)
-                XYRInterp.Midi.appendNote(note)
-                cc = CC(0x74, Xcontrol)
-                XYRInterp.Midi.appendCC(cc)
-                cc = CC(0x75, Ycontrol)
-                XYRInterp.Midi.sendNotes()
-                XYRInterp.Midi.sendCCs()
+                XYRInterp.Object2Note()
+                XYRInterp.SendAll()
                 previous_note_value = Xnote_value
             else:
                 next
