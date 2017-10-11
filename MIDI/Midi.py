@@ -1,13 +1,17 @@
 from MidiOut import MidiOut
-#from Object import Object
 from MidiNote import MidiNote
+import utils.XYRInterpConfig as config
 import time
 
 class Midi:
-    def __init__(self,device):
+    def __init__(self,device=None):
         self.MidiOut = MidiOut(device)
         self.Notes = []
         self.CCs = []
+
+    def config(self):
+        self.MidiOut.device = config.MIDI_DEVICE
+
 
     def sendNotes(self):
         for note in self.Notes:

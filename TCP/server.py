@@ -1,5 +1,5 @@
 import socket
-import utils.coordinateInterpreterConfig as config
+import utils.XYRInterpConfig as config
 
 class server:
     def __init__(self, ip= '192.168.0.11', port = 5005, buffer_size=60):

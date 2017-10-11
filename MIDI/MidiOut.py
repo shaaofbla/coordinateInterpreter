@@ -27,3 +27,6 @@ class MidiOut:
 
     def send(self,message):
         self.Output.send_message(message)
+
+    def delet(self):
+        del self.Output
