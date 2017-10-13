@@ -9,7 +9,6 @@ class MidiOut:
 
     def getDevicePort(self):
         available_ports = self.Output.get_ports()
-        #available_ports = [x.encode('UTF8') for x in available_ports]
         try:
             self.Port = available_ports.index(self.Device)
         except ValueError:
@@ -26,7 +25,10 @@ class MidiOut:
         self.Output.open_port(self.Port)
 
     def send(self,message):
-        self.Output.send_message(message)
+        try:
+            self.Output.send_message(message)
+        except OverflowError:
+            raise OverflowError("Somthing is wrong with the message: {0}".format(message)) 
 
     def delet(self):
         del self.Output
